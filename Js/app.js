@@ -230,7 +230,7 @@ function renderNovoEvento() {
 function cadastrarEvento(event) {
     event.preventDefault();
 
-    // Obtém os valores digitados
+  
     const titulo = document.querySelector("#titulo").value.trim();
     const tipo = document.querySelector("#tipo").value;
     const data = document.querySelector("#data").value;
@@ -239,7 +239,7 @@ function cadastrarEvento(event) {
 
     const mensagem = document.querySelector("#mensagem");
 
-    // Validação dos campos obrigatórios
+    
     if (!titulo || !tipo || !data || !local || !descricao) {
         mensagem.innerHTML = `
             <div class="alert alert-danger">
@@ -265,10 +265,10 @@ function cadastrarEvento(event) {
         status: "Agendado"
     };
 
-    // Adiciona ao array
+    
     eventos.push(novoEvento);
 
-    // Limpa o formulário
+    
     document.querySelector("#formEvento").reset();
 
    
@@ -431,22 +431,21 @@ function criarCardEvento(evento, listaEventos) {
     );
     badgeStatus.textContent = evento.status;
 
-    // Data
+    
     const data = document.createElement("p");
     data.classList.add("mt-3", "mb-1");
     data.innerHTML = `<strong>Data:</strong> ${formatarData(evento.data)}`;
 
-    // Local
     const local = document.createElement("p");
     local.classList.add("mb-1");
     local.innerHTML = `<strong>Local:</strong> ${evento.local}`;
 
-    // Descrição
+ 
     const descricao = document.createElement("p");
     descricao.classList.add("descricao-evento", "text-muted");
     descricao.textContent = evento.descricao;
 
-    // Área dos botões
+   
     const areaBotoes = document.createElement("div");
     areaBotoes.classList.add(
         "d-flex",
@@ -454,7 +453,7 @@ function criarCardEvento(evento, listaEventos) {
         "mt-3"
     );
 
-    // Botão realizar
+    
     const botaoRealizar = document.createElement("button");
     botaoRealizar.classList.add(
         "btn",
@@ -463,7 +462,7 @@ function criarCardEvento(evento, listaEventos) {
     );
     botaoRealizar.textContent = "Marcar como Realizado";
 
-    // Desabilita o botão se já estiver realizado
+   
     if (evento.status === "Realizado") {
         botaoRealizar.disabled = true;
         botaoRealizar.textContent = "Evento Realizado";
@@ -473,7 +472,7 @@ function criarCardEvento(evento, listaEventos) {
         marcarComoRealizado(evento.id);
     });
 
-    // Botão excluir
+    
     const botaoExcluir = document.createElement("button");
     botaoExcluir.classList.add(
         "btn",
@@ -486,7 +485,7 @@ function criarCardEvento(evento, listaEventos) {
         excluirEvento(evento.id);
     });
 
-    // Montagem do card
+    
     corpo.appendChild(titulo);
     corpo.appendChild(badgeTipo);
     corpo.appendChild(badgeStatus);
@@ -505,9 +504,7 @@ function criarCardEvento(evento, listaEventos) {
 }
 
 
-// ======================================================
-// MARCAR EVENTO COMO REALIZADO
-// ======================================================
+
 
 function marcarComoRealizado(id) {
 
@@ -516,15 +513,12 @@ function marcarComoRealizado(id) {
     if (evento) {
         evento.status = "Realizado";
 
-        // Atualiza a listagem
+        
         atualizarLista();
     }
 }
 
 
-// ======================================================
-// EXCLUIR EVENTO
-// ======================================================
 
 function excluirEvento(id) {
 
@@ -536,17 +530,13 @@ function excluirEvento(id) {
         return;
     }
 
-    // Remove o evento do array
+   
     eventos = eventos.filter(evento => evento.id !== id);
 
-    // Atualiza a listagem
+    
     atualizarLista();
 }
 
-
-// ======================================================
-// FORMATAÇÃO DA DATA
-// ======================================================
 
 function formatarData(data) {
     const partes = data.split("-");
@@ -555,9 +545,5 @@ function formatarData(data) {
 }
 
 
-// ======================================================
-// INICIALIZAÇÃO
-// ======================================================
 
-// Exibe o Dashboard ao abrir a aplicação
 mostrarTela("dashboard");
